@@ -1,19 +1,13 @@
 import { BrowserModule, bootstrapApplication } from '@angular/platform-browser';
-import { appConfig } from './app/app.config';
 import { AppComponent } from './app/app.component';
-import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
-import { AppModule } from './app/app.module';
 import { importProvidersFrom } from '@angular/core';
-import { HeaderComponent } from './app/assets/header/header.component';
-import { FooterComponent } from './app/assets/footer/footer.component';
-
-platformBrowserDynamic().bootstrapModule(AppModule)
-  .catch(err => console.error(err));
+import { RouterModule } from '@angular/router';
+import { routes } from './app/app.routes';
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 
   bootstrapApplication(AppComponent, {
     providers: [
       importProvidersFrom(BrowserModule),
-      HeaderComponent,
-      FooterComponent
+      importProvidersFrom(RouterModule.forRoot(routes)), provideAnimationsAsync()
     ]
   }).catch(err => console.error(err));
